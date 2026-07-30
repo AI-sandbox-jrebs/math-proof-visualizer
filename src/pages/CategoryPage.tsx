@@ -2,6 +2,18 @@ import { Link, useParams } from 'react-router-dom';
 import { categories, categoryById, roadmap } from '../data';
 import type { CategoryId } from '../types';
 import { Prose } from '../components/Math';
+import {
+  Action,
+  Card,
+  Chip,
+  Chips,
+  Crumbs,
+  Difficulty,
+  FieldNote,
+  Kicker,
+  Rung,
+  accentStyle,
+} from '../components/ui';
 
 export default function CategoryPage() {
   const { categoryId } = useParams();
@@ -18,63 +30,52 @@ export default function CategoryPage() {
   const index = categories.findIndex((c) => c.id === category.id);
   const nextCategory = categories[index + 1];
   return (
-    <div className="page" style={{ '--accent': category.color } as React.CSSProperties}>
-      <nav className="crumbs">
+    <div className="page" style={accentStyle(category.color)}>
+      <Crumbs>
         <Link to="/">Tracks</Link>
         <span>/</span>
         <b>{category.title}</b>
-      </nav>
+      </Crumbs>
       <header className="track-head">
-        <span className="track-kicker">{category.kicker}</span>
+        <Kicker>{category.kicker}</Kicker>
         <h1>{category.title}</h1>
         <p>{category.blurb}</p>
       </header>
 
       <ol className="roadmap">
         {steps.map(({ proof, imported }, i) => (
-          <li key={proof.id} className="roadmap-step">
-            <div className="roadmap-rail">
-              <span className="roadmap-dot">{i + 1}</span>
-              {i < steps.length - 1 ? <span className="roadmap-line" /> : null}
-            </div>
-            <Link to={`/proof/${proof.id}`} className="roadmap-card">
-              <div className="roadmap-card-head">
+          <Rung key={proof.id} index={i + 1} last={i === steps.length - 1}>
+            <Card to={`/proof/${proof.id}`}>
+              <div className="rung-head">
                 <h3>{proof.title}</h3>
-                <span className="difficulty" title={`difficulty ${proof.difficulty}/5`}>
-                  {'●'.repeat(proof.difficulty)}
-                  <span className="difficulty-dim">{'●'.repeat(5 - proof.difficulty)}</span>
-                </span>
+                <Difficulty level={proof.difficulty} />
               </div>
-              <Prose className="roadmap-tagline" text={proof.tagline} />
-              <div className="chips">
+              <Prose className="rung-tagline" text={proof.tagline} />
+              <Chips>
                 {proof.techniques.map((t) => (
-                  <span key={t} className="chip">
-                    {t}
-                  </span>
+                  <Chip key={t}>{t}</Chip>
                 ))}
                 {imported.map((p) => (
-                  <span key={p.id} className="chip chip-import">
+                  <Chip key={p.id} tone="accent">
                     needs {p.title}
-                  </span>
+                  </Chip>
                 ))}
-              </div>
-              <p className="roadmap-physical">
-                <b>{proof.physical.anchor}</b> — {proof.physical.description}
-              </p>
-            </Link>
-          </li>
+              </Chips>
+              <FieldNote anchor={proof.physical.anchor}>{proof.physical.description}</FieldNote>
+            </Card>
+          </Rung>
         ))}
       </ol>
 
       <div className="track-foot">
         {nextCategory ? (
-          <Link className="cta cta-ghost" to={`/track/${nextCategory.id}`}>
+          <Action to={`/track/${nextCategory.id}`} tone="ghost">
             Next track: {nextCategory.title} →
-          </Link>
+          </Action>
         ) : null}
-        <Link className="cta cta-ghost" to="/atlas">
+        <Action to="/atlas" tone="ghost">
           See this track on the map
-        </Link>
+        </Action>
       </div>
     </div>
   );

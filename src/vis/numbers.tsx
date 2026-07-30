@@ -106,7 +106,7 @@ export function Gcd() {
         <Slider label="b =" value={b} min={1} max={120} onChange={setB} />
       </Controls>
       <svg viewBox="0 0 340 165" className="vis-svg" style={{ maxHeight: 240 }}>
-        <rect x={10} y={10} width={a * scale} height={b * scale} fill="#1d2537" stroke={palette.grid} />
+        <rect x={10} y={10} width={a * scale} height={b * scale} fill={palette.sunk} stroke={palette.grid} />
         {(() => {
           // tile the rectangle greedily with the largest squares that fit
           const tiles: { x: number; y: number; s: number }[] = [];

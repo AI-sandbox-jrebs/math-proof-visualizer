@@ -34,7 +34,7 @@ export function Kraft() {
         <Btn onClick={() => setLengths([1, 1, 2, 2])}>overspend</Btn>
       </Controls>
       <svg viewBox="0 0 340 96" className="vis-svg" style={{ maxHeight: 140 }}>
-        <rect x={10} y={26} width={320} height={34} fill="#141a28" stroke={palette.grid} />
+        <rect x={10} y={26} width={320} height={34} fill={palette.sunk} stroke={palette.grid} />
         {packed.map((p, k) => (
           <g key={k}>
             <rect
@@ -44,9 +44,9 @@ export function Kraft() {
               height={34}
               fill={p.overflow ? palette.d : [palette.a, palette.b, palette.c, palette.e][k % 4]}
               opacity={0.85}
-              stroke="#0b0f18"
+              stroke={palette.onFill}
             />
-            <text x={12 + Math.min(1, p.start) * 320} y={48} fontSize="9" fill="#0b0f18">
+            <text x={12 + Math.min(1, p.start) * 320} y={48} fontSize="9" fill={palette.onFill}>
               {p.code}
             </text>
           </g>
@@ -165,13 +165,13 @@ export function Huffman() {
         ))}
         {layout.nodes.map((nd, i) => (
           <g key={i}>
-            <circle cx={nd.x} cy={nd.y} r={nd.leaf ? 13 : 10} fill={nd.leaf ? palette.b : '#1d2537'} stroke={palette.grid} />
+            <circle cx={nd.x} cy={nd.y} r={nd.leaf ? 13 : 10} fill={nd.leaf ? palette.b : palette.sunk} stroke={palette.grid} />
             <text
               x={nd.x}
               y={nd.y + 3}
               textAnchor="middle"
               fontSize={nd.leaf ? 9 : 8}
-              fill={nd.leaf ? '#0b0f18' : palette.dim}
+              fill={nd.leaf ? palette.onFill : palette.dim}
             >
               {nd.label}
             </text>

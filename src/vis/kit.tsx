@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { theme } from '../theme';
 
 export function Controls({ children }: { children: ReactNode }) {
   return <div className="vis-controls">{children}</div>;
@@ -91,13 +92,23 @@ export function makeRng(seed: number) {
   };
 }
 
+/** Semantic drawing colours for the SVG visualizations, drawn from the shared theme. */
 export const palette = {
-  a: '#7c9cff',
-  b: '#6fe3c4',
-  c: '#ffc46b',
-  d: '#ff8fa3',
-  e: '#c79bff',
-  grid: '#2a3348',
-  text: '#e8ecf7',
-  dim: '#8b96b0',
+  a: theme.river,
+  b: theme.fir,
+  c: theme.amber,
+  d: theme.clay,
+  e: theme.lupine,
+  aStrong: '#2f4f6e',
+  grid: theme.line,
+  gridStrong: theme.lineStrong,
+  text: theme.ink,
+  dim: theme.inkSoft,
+  surface: theme.surface,
+  sunk: theme.paperDeep,
+  onFill: '#fdf8f1',
+  tintA: '#dbe4ee',
+  tintB: '#dde8dd',
+  tintD: '#f4dfd8',
+  tintE: '#e6e0f0',
 };

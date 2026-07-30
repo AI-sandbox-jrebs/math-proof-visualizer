@@ -1,17 +1,43 @@
 @import 'katex/dist/katex.min.css';
 
+/* Values mirror src/theme.ts, which the SVG visualizations read from. */
 :root {
-  --bg: #0b0f18;
-  --bg-soft: #121826;
-  --panel: #151c2b;
-  --line: #26304a;
-  --text: #e8ecf7;
-  --dim: #8b96b0;
-  --accent: #7c9cff;
-  color-scheme: dark;
-  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --paper: #f4efe6;
+  --paper-deep: #ece4d6;
+  --surface: #fdfaf4;
+  --surface-sunk: #e7dece;
+  --ink: #232a26;
+  --ink-soft: #5f6b63;
+  --line: #ddd3c2;
+  --line-strong: #bcae97;
+
+  --cedar: #b3592c;
+  --fir: #2f6b54;
+  --moss: #6e8c3c;
+  --river: #46698c;
+  --amber: #a97a1c;
+  --huckleberry: #7b4a6b;
+  --rain: #3f7f86;
+  --clay: #c04a33;
+  --lupine: #5f5aa0;
+
+  /* per-track colour, set on a wrapper by pages */
+  --accent: var(--river);
+
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 16px;
+  --shadow-low: 0 1px 0 rgba(90, 74, 48, 0.06), 0 2px 8px rgba(90, 74, 48, 0.05);
+  --shadow-lift: 0 2px 4px rgba(90, 74, 48, 0.08), 0 12px 26px rgba(90, 74, 48, 0.1);
+
+  --font-display: 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
+  --font-body: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  color-scheme: light;
+  font-family: var(--font-body);
   font-size: 16px;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 * {
@@ -22,12 +48,15 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background:
-    radial-gradient(1100px 600px at 15% -10%, #1a2340 0%, transparent 60%),
-    radial-gradient(900px 500px at 110% 10%, #241c39 0%, transparent 55%),
-    var(--bg);
-  color: var(--text);
+  color: var(--ink);
   min-height: 100%;
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(900px 460px at 12% -8%, rgba(179, 89, 44, 0.09) 0%, transparent 62%),
+    radial-gradient(760px 420px at 104% 4%, rgba(47, 107, 84, 0.1) 0%, transparent 58%),
+    /* faint topographic contours: a Northwest field-guide texture */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='160' viewBox='0 0 240 160'%3E%3Cg fill='none' stroke='%23806a48' stroke-opacity='0.09' stroke-width='1'%3E%3Cpath d='M-20 26c40-22 78 16 120 8s76-34 120-14'/%3E%3Cpath d='M-20 58c40-22 78 16 120 8s76-34 120-14'/%3E%3Cpath d='M-20 90c40-22 78 16 120 8s76-34 120-14'/%3E%3Cpath d='M-20 122c40-22 78 16 120 8s76-34 120-14'/%3E%3Cpath d='M-20 154c40-22 78 16 120 8s76-34 120-14'/%3E%3C/g%3E%3C/svg%3E");
+  background-attachment: fixed, fixed, fixed;
 }
 
 a {
@@ -37,27 +66,37 @@ a {
 h1,
 h2,
 h3 {
-  line-height: 1.25;
+  line-height: 1.22;
   margin: 0 0 0.4em;
-  font-weight: 650;
-  letter-spacing: -0.01em;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.005em;
 }
 
 code {
-  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
-  font-size: 0.9em;
-  background: #1c2436;
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: var(--surface-sunk);
   border: 1px solid var(--line);
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   padding: 0.05em 0.35em;
 }
 
 .katex {
-  font-size: 1.02em;
+  font-size: 1.03em;
 }
 
 .tex-block {
   overflow-x: auto;
   overflow-y: hidden;
   padding: 0.65rem 0;
+}
+
+::selection {
+  background: rgba(179, 89, 44, 0.22);
+}
+
+:focus-visible {
+  outline: 2px solid var(--cedar);
+  outline-offset: 2px;
 }

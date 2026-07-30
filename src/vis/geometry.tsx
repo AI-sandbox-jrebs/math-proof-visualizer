@@ -70,7 +70,7 @@ export function Pythagoras() {
         <Slider label="rearrange" value={t} min={0} max={1} step={0.02} onChange={setT} format={(v) => (v < 0.5 ? 'A' : 'B')} />
       </Controls>
       <svg viewBox="0 0 340 175" className="vis-svg" style={{ maxHeight: 260 }}>
-        <rect x={10} y={10} width={S * scale} height={S * scale} fill="#141a28" stroke={palette.grid} />
+        <rect x={10} y={10} width={S * scale} height={S * scale} fill={palette.sunk} stroke={palette.grid} />
         {[0, 1, 2, 3].map((i) => (
           <polygon
             key={i}
@@ -79,7 +79,7 @@ export function Pythagoras() {
               .join(' ')}
             fill={palette.a}
             opacity={0.85}
-            stroke="#0b0f18"
+            stroke={palette.onFill}
           />
         ))}
         <text x={180} y={30} fontSize="10" fill={palette.text}>
@@ -283,8 +283,8 @@ export function PageRank() {
           const r = 10 + cur[i] * 70;
           return (
             <g key={label}>
-              <circle cx={p.x} cy={p.y} r={r} fill={palette.e} opacity={0.75} stroke="#0b0f18" />
-              <text x={p.x} y={p.y + 4} textAnchor="middle" fontSize="11" fill="#0b0f18">
+              <circle cx={p.x} cy={p.y} r={r} fill={palette.e} opacity={0.75} stroke={palette.onFill} />
+              <text x={p.x} y={p.y + 4} textAnchor="middle" fontSize="11" fill={palette.onFill}>
                 {label}
               </text>
               <text x={p.x} y={p.y + r + 12} textAnchor="middle" fontSize="9" fill={palette.dim}>

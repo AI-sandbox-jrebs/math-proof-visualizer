@@ -75,7 +75,7 @@ export function Handshake() {
                 cx={p.x}
                 cy={p.y}
                 r={16}
-                fill={pending === i ? palette.c : isOdd ? '#3a2a3f' : '#1d2537'}
+                fill={pending === i ? palette.c : isOdd ? palette.tintD : palette.sunk}
                 stroke={isOdd ? palette.d : palette.grid}
                 strokeWidth={1.6}
               />
@@ -181,7 +181,7 @@ export function Euler() {
               cx={l.x}
               cy={l.y}
               r={17}
-              fill={current === l.id ? palette.c : degree[i] % 2 ? '#3a2a3f' : '#20362f'}
+              fill={current === l.id ? palette.c : degree[i] % 2 ? palette.tintD : palette.tintB}
               stroke={palette.grid}
             />
             <text x={l.x} y={l.y + 4} textAnchor="middle" fontSize="11" fill={palette.text}>
@@ -265,9 +265,9 @@ export function Bipartite() {
                 cy={p.y}
                 r={15}
                 fill={colours[i] === 0 ? palette.a : palette.c}
-                stroke="#0b0f18"
+                stroke={palette.onFill}
               />
-              <text x={p.x} y={p.y + 4} textAnchor="middle" fontSize="10" fill="#0b0f18">
+              <text x={p.x} y={p.y + 4} textAnchor="middle" fontSize="10" fill={palette.onFill}>
                 {i}
               </text>
             </g>

@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import { categoryById, neighbours, proofById, proofsInCategory } from '../data';
 import { Prose, TeX } from '../components/Math';
 import { visualizations } from '../vis/registry';
+import { Action, Chip, Chips, Crumbs, Panel, accentStyle } from '../components/ui';
 
 export default function ProofPage() {
   const { proofId } = useParams();
@@ -22,46 +23,42 @@ export default function ProofPage() {
   const links = neighbours(proof.id);
   const Vis = visualizations[proof.visId];
   return (
-    <div className="page proof-page" style={{ '--accent': category.color } as React.CSSProperties}>
-      <nav className="crumbs">
+    <div className="page proof-page" style={accentStyle(category.color)}>
+      <Crumbs>
         <Link to="/">Tracks</Link>
         <span>/</span>
         <Link to={`/track/${category.id}`}>{category.title}</Link>
         <span>/</span>
         <b>step {at + 1}</b>
-      </nav>
+      </Crumbs>
 
       <header className="proof-head">
         <h1>{proof.title}</h1>
         <Prose className="proof-tagline" text={proof.tagline} />
-        <div className="chips">
+        <Chips>
           {proof.techniques.map((t) => (
-            <span key={t} className="chip">
+            <Chip key={t} tone="accent">
               {t}
-            </span>
+            </Chip>
           ))}
-          <span className="chip chip-dim">difficulty {proof.difficulty}/5</span>
-        </div>
+          <Chip tone="quiet">difficulty {proof.difficulty}/5</Chip>
+        </Chips>
       </header>
 
-      <section className="panel panel-statement">
-        <h2>Theorem</h2>
+      <Panel label="Theorem" tone="quote">
         <Prose text={proof.statement} />
         {proof.statementDisplay ? <TeX tex={proof.statementDisplay} block /> : null}
-      </section>
+      </Panel>
 
-      <section className="panel panel-vis">
-        <h2>Play with it</h2>
+      <Panel label="Play with it" tone="stage">
         {Vis ? <Vis /> : <p className="missing">No visualization registered for “{proof.visId}”.</p>}
-      </section>
+      </Panel>
 
-      <section className="panel">
-        <h2>The idea</h2>
+      <Panel label="The idea">
         <Prose text={proof.intuition} />
-      </section>
+      </Panel>
 
-      <section className="panel">
-        <h2>Proof</h2>
+      <Panel label="Proof">
         <ol className="steps">
           {proof.steps.map((step, i) => (
             <li key={i}>
@@ -73,16 +70,14 @@ export default function ProofPage() {
           ))}
         </ol>
         <p className="qed">∎</p>
-      </section>
+      </Panel>
 
-      <section className="panel panel-physical">
-        <h2>In the physical world</h2>
+      <Panel label="In the physical world" tone="field">
         <h3>{proof.physical.anchor}</h3>
         <Prose text={proof.physical.description} />
-      </section>
+      </Panel>
 
-      <section className="panel">
-        <h2>Where it shows up</h2>
+      <Panel label="Where it shows up">
         <ul className="applications">
           {proof.applications.map((a) => (
             <li key={a}>
@@ -90,10 +85,9 @@ export default function ProofPage() {
             </li>
           ))}
         </ul>
-      </section>
+      </Panel>
 
-      <section className="panel panel-links">
-        <h2>How it connects</h2>
+      <Panel label="How it connects">
         <div className="link-cols">
           <div>
             <h3>Builds on</h3>
@@ -139,24 +133,24 @@ export default function ProofPage() {
             )}
           </div>
         </div>
-      </section>
+      </Panel>
 
       <nav className="proof-nav">
         {prev ? (
-          <Link className="cta cta-ghost" to={`/proof/${prev.id}`}>
+          <Action to={`/proof/${prev.id}`} tone="ghost">
             ← {prev.title}
-          </Link>
+          </Action>
         ) : (
           <span />
         )}
         {next ? (
-          <Link className="cta cta-ghost" to={`/proof/${next.id}`}>
+          <Action to={`/proof/${next.id}`} tone="ghost">
             {next.title} →
-          </Link>
+          </Action>
         ) : (
-          <Link className="cta cta-ghost" to="/atlas">
+          <Action to="/atlas" tone="ghost">
             End of the track — open the map
-          </Link>
+          </Action>
         )}
       </nav>
     </div>

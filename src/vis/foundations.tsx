@@ -29,8 +29,8 @@ export function Staircase() {
             width={cell - 1.5}
             height={cell - 1.5}
             rx={2}
-            fill={b.own ? palette.a : '#1d2537'}
-            stroke={b.own ? '#a8bcff' : palette.grid}
+            fill={b.own ? palette.a : palette.sunk}
+            stroke={b.own ? palette.aStrong : palette.grid}
             strokeWidth={0.8}
           />
         ))}

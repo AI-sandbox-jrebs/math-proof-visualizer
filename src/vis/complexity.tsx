@@ -33,9 +33,9 @@ export function DecisionTree() {
                 height={150 / depths.length - 4}
                 rx={2}
                 fill={enough ? palette.b : palette.a}
-                opacity={enough ? 0.9 : 0.45}
+                opacity={enough ? 0.95 : 0.75}
               />
-              <text x={14} y={y + 11} fontSize="8" fill="#0b0f18">
+              <text x={14} y={y + 11} fontSize="8" fill={palette.onFill}>
                 depth {h}: {2 ** h} leaves
               </text>
             </g>
@@ -289,10 +289,10 @@ export function Clique() {
                 cx={p.x}
                 cy={p.y}
                 r={15}
-                fill={isChosen ? palette.b : '#1d2537'}
+                fill={isChosen ? palette.b : palette.sunk}
                 stroke={isChosen ? '#fff' : palette.grid}
               />
-              <text x={p.x} y={p.y + 4} textAnchor="middle" fontSize="11" fill={isChosen ? '#0b0f18' : palette.text}>
+              <text x={p.x} y={p.y + 4} textAnchor="middle" fontSize="11" fill={isChosen ? palette.onFill : palette.text}>
                 {p.lit}
               </text>
             </g>

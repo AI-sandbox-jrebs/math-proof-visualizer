@@ -256,11 +256,11 @@ export function Dijkstra() {
                 cx={nd.x}
                 cy={nd.y}
                 r={16}
-                fill={isSettled ? palette.b : next && next.id === nd.id ? '#2f3d5c' : '#1d2537'}
+                fill={isSettled ? palette.b : next && next.id === nd.id ? palette.tintA : palette.sunk}
                 stroke={isSettled ? '#fff' : palette.grid}
                 strokeWidth={1.4}
               />
-              <text x={nd.x} y={nd.y + 4} textAnchor="middle" fontSize="11" fill={isSettled ? '#0b0f18' : palette.text}>
+              <text x={nd.x} y={nd.y + 4} textAnchor="middle" fontSize="11" fill={isSettled ? palette.onFill : palette.text}>
                 {nd.id}
               </text>
               <text x={nd.x} y={nd.y - 20} textAnchor="middle" fontSize="9" fill={palette.c}>
@@ -351,7 +351,7 @@ export function MstCut() {
               cx={nd.x}
               cy={nd.y}
               r={15}
-              fill={nd.x < threshold ? '#22304d' : '#1d2537'}
+              fill={nd.x < threshold ? palette.tintA : palette.sunk}
               stroke={palette.grid}
             />
             <text x={nd.x} y={nd.y + 4} textAnchor="middle" fontSize="11" fill={palette.text}>
@@ -489,7 +489,7 @@ export function MaxFlow() {
               cx={nd.x}
               cy={nd.y}
               r={15}
-              fill={!hasPath && reachable.has(nd.id) ? '#3a2a3f' : '#1d2537'}
+              fill={!hasPath && reachable.has(nd.id) ? palette.tintD : palette.sunk}
               stroke={reachable.has(nd.id) && !hasPath ? palette.d : palette.grid}
               strokeWidth={1.4}
             />

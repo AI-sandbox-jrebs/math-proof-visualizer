@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
 import { categories, edges, proofs, proofsInCategory } from '../data';
+import { Action, Card, Kicker, SectionHeading, accentStyle } from '../components/ui';
 
 export default function Home() {
   const softCount = edges.filter((e) => e.kind === 'soft').length;
@@ -16,12 +16,10 @@ export default function Home() {
           seen; the map shows how the tracks touch.
         </p>
         <div className="hero-actions">
-          <Link className="cta" to="/track/foundations">
-            Start with foundations
-          </Link>
-          <Link className="cta cta-ghost" to="/atlas">
+          <Action to="/track/foundations">Start with foundations</Action>
+          <Action to="/atlas" tone="ghost">
             Open the map
-          </Link>
+          </Action>
         </div>
         <div className="hero-stats">
           <span>
@@ -40,23 +38,26 @@ export default function Home() {
       </section>
 
       <section>
-        <h2 className="section-title">Roadmaps</h2>
+        <SectionHeading>Roadmaps</SectionHeading>
         <div className="track-grid">
-          {categories.map((cat) => {
-            const list = proofsInCategory(cat.id);
-            return (
-              <Link key={cat.id} to={`/track/${cat.id}`} className="track-card" style={{ '--accent': cat.color } as React.CSSProperties}>
-                <span className="track-kicker">{cat.kicker}</span>
-                <h3>{cat.title}</h3>
-                <p>{cat.blurb}</p>
-                <ol className="track-peek">
-                  {list.map((p) => (
-                    <li key={p.id}>{p.title}</li>
-                  ))}
-                </ol>
-              </Link>
-            );
-          })}
+          {categories.map((cat) => (
+            <Card
+              key={cat.id}
+              to={`/track/${cat.id}`}
+              tone="ridge"
+              className="track-card"
+              style={accentStyle(cat.color)}
+            >
+              <Kicker>{cat.kicker}</Kicker>
+              <h3>{cat.title}</h3>
+              <p>{cat.blurb}</p>
+              <ol className="track-peek">
+                {proofsInCategory(cat.id).map((p) => (
+                  <li key={p.id}>{p.title}</li>
+                ))}
+              </ol>
+            </Card>
+          ))}
         </div>
       </section>
     </div>

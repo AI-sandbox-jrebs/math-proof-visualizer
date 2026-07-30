@@ -35,7 +35,7 @@ export function Pumping() {
                 cx={cx}
                 cy={58}
                 r={12}
-                fill={looped ? palette.d : '#1d2537'}
+                fill={looped ? palette.d : palette.sunk}
                 stroke={looped ? '#fff' : palette.grid}
               />
               <text x={cx} y={62} textAnchor="middle" fontSize="10" fill={palette.text}>
@@ -107,12 +107,12 @@ export function Halting() {
         </Btn>
       </Controls>
       <svg viewBox="0 0 360 150" className="vis-svg" style={{ maxHeight: 220 }}>
-        <rect x={8} y={54} width={70} height={40} rx={6} fill="#1d2537" stroke={palette.grid} />
+        <rect x={8} y={54} width={70} height={40} rx={6} fill={palette.sunk} stroke={palette.grid} />
         <text x={43} y={78} textAnchor="middle" fontSize="12" fill={palette.text}>
           ⟨D⟩
         </text>
         <path d="M78 74 H 118" stroke={palette.dim} strokeWidth={1.5} markerEnd="url(#arrow2)" />
-        <rect x={118} y={44} width={86} height={60} rx={6} fill="#22304d" stroke={palette.a} />
+        <rect x={118} y={44} width={86} height={60} rx={6} fill={palette.tintA} stroke={palette.a} />
         <text x={161} y={70} textAnchor="middle" fontSize="12" fill={palette.text}>
           H(M, w)
         </text>
@@ -120,7 +120,7 @@ export function Halting() {
           oracle
         </text>
         <path d="M204 74 H 244" stroke={palette.dim} strokeWidth={1.5} markerEnd="url(#arrow2)" />
-        <rect x={244} y={44} width={104} height={60} rx={6} fill="#2b2438" stroke={palette.d} />
+        <rect x={244} y={44} width={104} height={60} rx={6} fill={palette.tintE} stroke={palette.d} />
         <text x={296} y={68} textAnchor="middle" fontSize="12" fill={palette.text}>
           invert
         </text>
@@ -176,11 +176,11 @@ export function Reduction() {
         <text x={10} y={20} fontSize="10" fill={palette.dim}>
           N(x): simulate M(w), then run G(x)
         </text>
-        <rect x={10} y={34} width={54} height={44} rx={6} fill="#1d2537" stroke={palette.grid} />
+        <rect x={10} y={34} width={54} height={44} rx={6} fill={palette.sunk} stroke={palette.grid} />
         <text x={37} y={60} textAnchor="middle" fontSize="11" fill={palette.text}>
           x
         </text>
-        <rect x={92} y={34} width={94} height={44} rx={6} fill="#22304d" stroke={palette.a} />
+        <rect x={92} y={34} width={94} height={44} rx={6} fill={palette.tintA} stroke={palette.a} />
         <text x={139} y={54} textAnchor="middle" fontSize="11" fill={palette.text}>
           simulate M(w)
         </text>
@@ -193,7 +193,7 @@ export function Reduction() {
           width={70}
           height={44}
           rx={6}
-          fill={halts ? '#20362f' : '#2b2438'}
+          fill={halts ? palette.tintB : palette.tintE}
           stroke={halts ? palette.b : palette.grid}
         />
         <text x={249} y={60} textAnchor="middle" fontSize="11" fill={palette.text}>

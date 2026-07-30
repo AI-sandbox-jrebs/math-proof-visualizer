@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
 import {
   forceCollide,
   forceLink,
@@ -12,6 +11,9 @@ import type { SimulationLinkDatum, SimulationNodeDatum } from 'd3-force';
 import { categories, categoryById, edges, neighbours, proofById, proofs } from '../data';
 import type { CategoryId } from '../types';
 import { Prose } from '../components/Math';
+import { Action, Kicker, Panel } from '../components/ui';
+import { palette } from '../vis/kit';
+import { theme } from '../theme';
 
 const W = 1000;
 const H = 660;
@@ -112,7 +114,11 @@ export default function AtlasPage() {
               key={c.id}
               type="button"
               className={`vis-btn${focusCategory === c.id ? ' is-active' : ''}`}
-              style={{ borderColor: c.color, color: focusCategory === c.id ? '#0b0f18' : c.color, background: focusCategory === c.id ? c.color : undefined }}
+              style={{
+                borderColor: c.color,
+                color: focusCategory === c.id ? palette.onFill : c.color,
+                background: focusCategory === c.id ? c.color : undefined,
+              }}
               onClick={() => {
                 setFocusCategory(c.id);
                 setSelected(null);
@@ -154,10 +160,10 @@ export default function AtlasPage() {
                 y1={s.y}
                 x2={t.x}
                 y2={t.y}
-                stroke={l.kind === 'soft' ? '#c79bff' : '#4a5878'}
+                stroke={l.kind === 'soft' ? theme.lupine : theme.lineStrong}
                 strokeWidth={l.kind === 'soft' ? 1.1 : 1.8}
                 strokeDasharray={l.kind === 'soft' ? '5 5' : undefined}
-                opacity={faded ? 0.06 : l.kind === 'soft' ? 0.5 : 0.75}
+                opacity={faded ? 0.08 : l.kind === 'soft' ? 0.45 : 0.85}
               />
             );
           })}
@@ -183,7 +189,7 @@ export default function AtlasPage() {
                   cy={n.y}
                   r={7 + n.difficulty * 1.6}
                   fill={colour}
-                  stroke={isSelected ? '#fff' : '#0b0f18'}
+                  stroke={isSelected ? theme.ink : palette.onFill}
                   strokeWidth={isSelected ? 2.5 : 1}
                 />
                 <text
@@ -191,7 +197,7 @@ export default function AtlasPage() {
                   y={(n.y ?? 0) - 14 - n.difficulty}
                   textAnchor="middle"
                   fontSize={10}
-                  fill="#c3cbe0"
+                  fill={theme.ink}
                   opacity={labelled ? 1 : 0}
                   style={{ transition: 'opacity 0.12s ease' }}
                 >
@@ -202,12 +208,12 @@ export default function AtlasPage() {
           })}
         </svg>
 
-        <aside className="atlas-panel">
+        <Panel className="atlas-panel">
           {selectedProof && selectedLinks ? (
             <>
-              <span className="track-kicker" style={{ color: categoryById.get(selectedProof.category)!.color }}>
+              <Kicker color={categoryById.get(selectedProof.category)!.color}>
                 {categoryById.get(selectedProof.category)!.title}
-              </span>
+              </Kicker>
               <h2>{selectedProof.title}</h2>
               <Prose className="muted" text={selectedProof.tagline} />
               <h3>Physical anchor</h3>
@@ -257,9 +263,7 @@ export default function AtlasPage() {
                   </ul>
                 </>
               ) : null}
-              <Link className="cta" to={`/proof/${selectedProof.id}`}>
-                Open the proof
-              </Link>
+              <Action to={`/proof/${selectedProof.id}`}>Open the proof</Action>
             </>
           ) : (
             <>
@@ -282,7 +286,7 @@ export default function AtlasPage() {
               </p>
             </>
           )}
-        </aside>
+        </Panel>
       </div>
     </div>
   );
