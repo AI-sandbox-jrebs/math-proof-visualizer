@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router';
 import { categoryById, neighbours, proofById, proofsInCategory } from '../data';
 import { Prose, TeX } from '../components/Math';
 import { visualizations } from '../vis/registry';
