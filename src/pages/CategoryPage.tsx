@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router';
 import { categories, categoryById, roadmap } from '../data';
 import type { CategoryId } from '../types';
 import { Prose } from '../components/Math';

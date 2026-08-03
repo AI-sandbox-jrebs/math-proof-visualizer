@@ -1,4 +1,4 @@
-import { HashRouter, Link, NavLink, Navigate, Route, Routes } from 'react-router-dom';
+import { HashRouter, Link, NavLink, Navigate, Route, Routes } from 'react-router';
 import Home from './pages/Home';
 import CategoryPage from './pages/CategoryPage';
 import ProofPage from './pages/ProofPage';
