@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import type { CSSProperties, ReactNode } from 'react';
 
 /** Sets the per-subtree accent colour that every component below reads from. */
