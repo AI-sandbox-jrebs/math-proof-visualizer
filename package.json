@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "d3-force": "^3.0.0",
-    "katex": "^0.18.1",
+    "katex": "^0.18.2",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-router-dom": "^7.18.2"
